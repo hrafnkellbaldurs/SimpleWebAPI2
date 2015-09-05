@@ -12,13 +12,14 @@ namespace API.Models
         /// The ID of the course being created
         /// Example: "T-514-VEFT"
         /// </summary>
-        public int CourseID { get; set; }
+        /// [Required]
+        public String CourseID { get; set; }
 
         /// <summary>
         /// The semester in which the course is taught
         /// Example: "20153"
         /// </summary>
-        public string Semester { get; set; }
+        public String Semester { get; set; }
 
         /// <summary>
         /// Start date of the course being ceated
