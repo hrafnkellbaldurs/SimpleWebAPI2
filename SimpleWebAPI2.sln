@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWebAPI2", "SimpleWebA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Models", "API.Models\API.Models.csproj", "{D4FC7DB8-8E6E-4900-9ADF-535638704FE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Services", "API.Services\API.Services.csproj", "{9BC62F4C-F753-4B82-AF01-4683F4FD3376}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D4FC7DB8-8E6E-4900-9ADF-535638704FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4FC7DB8-8E6E-4900-9ADF-535638704FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4FC7DB8-8E6E-4900-9ADF-535638704FE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BC62F4C-F753-4B82-AF01-4683F4FD3376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BC62F4C-F753-4B82-AF01-4683F4FD3376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BC62F4C-F753-4B82-AF01-4683F4FD3376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BC62F4C-F753-4B82-AF01-4683F4FD3376}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
