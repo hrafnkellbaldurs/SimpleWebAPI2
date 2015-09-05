@@ -19,7 +19,7 @@ namespace API.Models
 
         /// <summary>
         /// The name of the course
-        /// Example: Vefþjónustur
+        /// Example: "Vefþjónustur"
         /// </summary>
         public String Name { get; set; }
 

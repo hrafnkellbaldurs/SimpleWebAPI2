@@ -9,10 +9,15 @@ namespace API.Models
     public class StudentDTO
     {
         /// <summary>
-        /// 
+        /// The name of the student
+        /// Example: "Gunnar Gunnarsson"
         /// </summary>
-        public string Name { get; set; }
+        public String Name { get; set; }
 
-        public string SSN { get; set; }
+        /// <summary>
+        /// The Social Security Number of a student
+        /// Example: "1234567890"
+        /// </summary>
+        public String SSN { get; set; }
     }
 }

@@ -7,20 +7,22 @@ using System.Threading.Tasks;
 namespace API.Models
 {
     /// <summary>
-    /// THis class represents a single course, and contains various
+    /// This class represents a single course, and contains various
     /// details about the course
     /// </summary>
     public class CourseDetailsDTO
     {
         /// <summary>
         /// The ID of the course
+        /// Example: 1
         /// </summary>
         public int ID { get; set; }
 
         /// <summary>
         /// The name of the course
+        /// Example: "Vefþjónustur
         /// </summary>
-        public string Name { get; set; }
+        public String Name { get; set; }
 
         /// <summary>
         /// List of students in the course
@@ -30,6 +32,6 @@ namespace API.Models
         /// <summary>
         /// Description of the course
         /// </summary>
-        public string Description { get; set; }
+        public String Description { get; set; }
     }
 }
