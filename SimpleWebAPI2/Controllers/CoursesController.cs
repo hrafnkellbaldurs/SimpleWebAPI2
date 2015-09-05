@@ -1,4 +1,4 @@
-﻿using SimpleWebAPI.Models;
+﻿using SimpleWebAPI2.Models;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -10,6 +10,7 @@ using API.Services;
 
 namespace SimpleWebAPI.Controllers
 {
+    /*
     /// <summary>
     /// This is the Courses Controller
     /// </summary>
@@ -237,4 +238,5 @@ namespace SimpleWebAPI.Controllers
             return NotFound();
         }
     }
+    */
 }

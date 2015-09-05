@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SimpleWebAPI.Models
+namespace SimpleWebAPI2.Models
 {
     /// <summary>
     /// This class represents a single course in a school
@@ -11,19 +11,14 @@ namespace SimpleWebAPI.Models
     public class Course
     {
         /// <summary>
-        /// The name of a course. Example: "Web Services".
+        /// The ID of a course. Example: 1.
         /// </summary>
-        public String Name { get; set; }
+        public int ID { get; set; }
 
         /// <summary>
         /// The Template ID of a course. Example: "T-514-VEFT"
         /// </summary>
-        public String TemplateID { get; set; }
-
-        /// <summary>
-        /// The ID of a course. Example: 1.
-        /// </summary>
-        public int ID { get; set; }
+        public String CourseIdentifier { get; set; }
 
         /// <summary>
         /// The start date of a course. Example: 2015-08-17
@@ -36,9 +31,11 @@ namespace SimpleWebAPI.Models
         public DateTime EndDate { get; set; }
 
         /// <summary>
-        /// A list of students enrolled in this class. Example: { new Student{ SSN = 3012937789, Name: = "John Walker"}, new Student{ SSN = 1234842245, Name = "Paul Johnson"} }
+        /// The semester that a course is tought. 
+        /// Example: "20151" -> Spring 2015, 
+        ///          "20152" -> Summer 2015, 
+        ///          "20153" -> Fall 2015
         /// </summary>
-        public List<Student> Students { get; set; }
-
+        public String Semester { get; set; }
     }
 }
