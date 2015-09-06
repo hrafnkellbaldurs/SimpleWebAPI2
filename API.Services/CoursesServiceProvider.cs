@@ -1,14 +1,13 @@
 ﻿using API.Models;
-using System.Collections.Generic;
 using API.Services.Repositories;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace API.Services
 {
     public class CoursesServiceProvider
     {
-
-        public readonly AppDataContext _db;
+        private readonly AppDataContext _db;
 
         public CoursesServiceProvider()
         {
@@ -16,12 +15,12 @@ namespace API.Services
         }
 
         /// <summary>
-        /// Returns a list of courses belonging to a given semester.
-        /// If no semester is provided, the "current" semester
-        /// will be used.
+        /// Finds and returns a list of course objects, given a semester. 
+        /// If no semester is provided, the "current" semester will be
+        /// used.
         /// </summary>
-        /// <param name="semester"></param>
-        /// <returns></returns>
+        /// <param name="semester">The semester to get the courses from </param>
+        /// <returns>A list of course objects being taught in a given semester</returns>
         public List<CourseDTO> GetCoursesBySemester(string semester = null)
         {
             if (string.IsNullOrEmpty(semester))
@@ -29,25 +28,24 @@ namespace API.Services
                 semester = "20153";
             }
 
-            // A: Method Syntax
-            var result = _db.Courses
-                .Where(x => x.Semester == semester)
-                .ToList();
+            // A:
+            //var result = _db.Courses.Where(x => x.Semester == semester).ToList();
 
-            // B: Query Syntax
-            var result2 = (from c in _db.Courses
-                          where c.Semester == semester
-                          select new CourseDTO
+            // B:
+            var result = (from c in _db.Courses
+                         where c.Semester == semester
+                         select new CourseDTO
                          {
                              ID = c.ID,
                              StartDate = c.StartDate,
                              EndDate = c.EndDate
-                             //Name = c.N
+                             //Name = c.Name,
+
                          }).ToList();
-                         
+
             
-                         
-            return null;
+
+            return result;
         }
     }
 }

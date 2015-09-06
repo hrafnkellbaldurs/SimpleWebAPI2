@@ -1,41 +1,40 @@
 ﻿using System;
-
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace API.Services.Entities
 {
     [Table("Courses")]
+    /// <summary>
+    /// This class represents a single course in a school
+    /// </summary>
     class Course
     {
         /// <summary>
-        /// ID of course
+        /// The ID of a course. Example: 1.
         /// </summary>
         public int ID { get; set; }
 
         /// <summary>
-        /// TemplateID of the course
-        /// Example: "T-514-VEFT"
+        /// The Template ID of a course. Example: "T-514-VEFT"
         /// </summary>
-        public string TemplateID { get; set; }
+        public String TemplateID { get; set; }
 
         /// <summary>
-        /// Start date of the course
+        /// The start date of a course. Example: 2015-08-17
         /// </summary>
         public DateTime StartDate { get; set; }
 
         /// <summary>
-        /// End date of the course
+        /// The end date of a course. Example: 2015-11-08
         /// </summary>
         public DateTime EndDate { get; set; }
 
         /// <summary>
-        /// Semester that the course is tought
-        /// Example: "20153"
+        /// The semester that a course is tought. 
+        /// Example: "20151" -> Spring 2015, 
+        ///          "20152" -> Summer 2015, 
+        ///          "20153" -> Fall 2015
         /// </summary>
-        public string Semester { get; set; }
+        public String Semester { get; set; }
     }
 }

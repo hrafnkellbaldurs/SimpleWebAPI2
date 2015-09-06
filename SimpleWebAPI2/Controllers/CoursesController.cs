@@ -10,7 +10,6 @@ using API.Services;
 
 namespace SimpleWebAPI.Controllers
 {
-    
     /// <summary>
     /// This is the Courses Controller
     /// </summary>
@@ -18,24 +17,23 @@ namespace SimpleWebAPI.Controllers
     public class CoursesController : ApiController
     {
         private readonly CoursesServiceProvider _service;
-
         /// <summary>
         /// This is the main course method
         /// </summary>
         public CoursesController()
         {
-            _service = new CoursesServiceProvider();
+            _service = new CoursesServiceProvider();       
         }
 
         /// <summary>
         /// Gets courses currently available
         /// </summary>
-        /// <returns>An ArrayList of Courses</returns>
+        /// <returns>A list of course objects</returns>
         [HttpGet]
         [Route("")]
-        public List<CourseDTO> GetCourses(string semester = null)
+        public List<CourseDTO> GetCourses(String semester = null)
         {
-            return _service.GetCoursesBySemester();
+            return _service.GetCoursesBySemester(semester);
         }
 
         /// <summary>
@@ -45,9 +43,18 @@ namespace SimpleWebAPI.Controllers
         /// <returns>An ArrayList of Students in the given course</returns>
         [HttpGet]
         [Route("{id:int}/students")]
-        public List <Student> GetStudentsInCourse(int id)
-        {
-            return null;
+        public List <StudentDTO> GetStudentsInCourse(int id)
+        {   
+           /* foreach (CourseDTO c in _courses)
+            {
+                if (c.ID == id)
+                {
+                    //return student
+                }
+            }*/
+
+            //return 404
+            throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
         /// <summary>
@@ -58,9 +65,21 @@ namespace SimpleWebAPI.Controllers
         [HttpPost]
         [Route("")]
         [ResponseType(typeof(Course))]
-        public IHttpActionResult AddCourse(Course c)
+        public IHttpActionResult AddCourse(CourseDTO c)
         {
-            return null;
+            //checking if the course being added is not of the right data type
+            if (c == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.PreconditionFailed);
+            }
+
+            //setting location url
+            var location = Url.Link("GetCourse", new { id = c.ID });
+
+            //adding course to list
+            //_courses.Add(c);
+
+            return Created(location, c);
         }
 
         /// <summary>
@@ -71,8 +90,32 @@ namespace SimpleWebAPI.Controllers
         /// <returns>Updated Course or an appropriate error</returns>
         [HttpPut]
         [Route("{id:int}")]
-        public IHttpActionResult UpdateCourse(int id, Course course)
+        public IHttpActionResult UpdateCourse(int id, CourseDTO course)
         {
+            //checking if the course being added is not of the right data type
+            if (course == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.PreconditionFailed);
+            }
+
+            //update right course
+            /*
+            foreach (CourseDTO c in _courses)
+            {
+                if (c.ID == id)
+                {
+                    var temp = _courses.SingleOrDefault(x=>x.ID == course.ID);
+                    temp.Name = course.Name;
+                    temp.StartDate = course.StartDate;
+                    temp.EndDate = course.EndDate;
+
+                    //201 successfully created
+                    var location = Url.Link("GetCourse", new { id = course.ID });
+                    return Created(location, temp);
+                }
+            }*/
+
+            //404 id not found
             return NotFound();
         }
 
@@ -85,6 +128,17 @@ namespace SimpleWebAPI.Controllers
         [Route("{id:int}")]
         public IHttpActionResult DeleteCourse(int id)
         {
+            /*
+            foreach (CourseDTO c in _courses)
+            {
+                if (c.ID == id)
+                {
+                    _courses.Remove(c);
+                    throw new HttpResponseException(HttpStatusCode.NoContent);
+                }
+            }*/
+
+            //return 404
             return NotFound();
         }
 
@@ -95,9 +149,16 @@ namespace SimpleWebAPI.Controllers
         /// <returns>The Course with the given ID, else HTTP status code 404 if ID is not found</returns>
         [HttpGet]
         [Route("{id:int}", Name ="GetCourse")]
-        public Course GetCourseById(int id)
+        public CourseDTO GetCourseById(int id)
         {
-            return null;
+            /*
+            foreach (CourseDTO c in _courses)
+            {
+                if (c.ID == id) return c; 
+            }*/
+
+            //return 404
+            throw new HttpResponseException(HttpStatusCode.NotFound);
         }
 
         /// <summary>
@@ -108,10 +169,26 @@ namespace SimpleWebAPI.Controllers
         /// <returns>The added Student, else HTTP status code 404</returns>
         [HttpPost]
         [Route("{id:int}/students")]
-        public IHttpActionResult AddStudentToCourse(int id, Student student)
+        public IHttpActionResult AddStudentToCourse(int id, StudentDTO student)
         {
-            return NotFound();   
+            //checking if the student being added is not of the right data type
+            if (student == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.PreconditionFailed);
+            }
+
+            /*
+            foreach (CourseDTO c in _courses)
+            {
+                if (c.ID == id) {
+                    //add student here
+                    var location = Url.Link("GetCourse", new { id = c.ID });
+                    return Created(location, student);
+                } 
+            }*/
+
+            //return 404
+            return NotFound();
         }
     }
-    
 }
