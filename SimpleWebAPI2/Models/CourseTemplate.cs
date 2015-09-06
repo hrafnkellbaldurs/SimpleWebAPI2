@@ -5,6 +5,9 @@ using System.Web;
 
 namespace SimpleWebAPI2.Models
 {
+    /// <summary>
+    /// hhh
+    /// </summary>
     public class CourseTemplate
     {
         /// <summary>
