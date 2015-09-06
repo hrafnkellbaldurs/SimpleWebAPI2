@@ -16,6 +16,12 @@ namespace API.Services.Entities
         public String ID { get; set; }
 
         /// <summary>
+        ///  The ID of a course template.
+        /// Example: "T-514-VEFT"
+        /// </summary>
+        public String TemplateID { get; set; }
+
+        /// <summary>
         /// The name of a course
         /// Example: "Vefþjónustur"
         /// </summary>

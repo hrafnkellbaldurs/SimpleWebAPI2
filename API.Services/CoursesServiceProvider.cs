@@ -33,13 +33,15 @@ namespace API.Services
 
             // B:
             var result = (from c in _db.Courses
+                          join ct in _db.CourseTemplates
+                            on c.TemplateID equals ct.TemplateID
                          where c.Semester == semester
                          select new CourseDTO
                          {
                              ID = c.ID,
                              StartDate = c.StartDate,
-                             EndDate = c.EndDate
-                             //Name = c.Name,
+                             EndDate = c.EndDate,
+                             Name = ct.Name
 
                          }).ToList();
 

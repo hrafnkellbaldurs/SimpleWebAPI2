@@ -1,10 +1,7 @@
-﻿using SimpleWebAPI2.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Linq;
 using API.Models;
 using API.Services;
 
@@ -31,7 +28,7 @@ namespace SimpleWebAPI.Controllers
         /// <returns>A list of course objects</returns>
         [HttpGet]
         [Route("")]
-        public List<CourseDTO> GetCourses(String semester = null)
+        public List<CourseDTO> GetCourses(string semester = null)
         {
             return _service.GetCoursesBySemester(semester);
         }
@@ -64,7 +61,7 @@ namespace SimpleWebAPI.Controllers
         /// <returns>The created course</returns>
         [HttpPost]
         [Route("")]
-        [ResponseType(typeof(Course))]
+        [ResponseType(typeof(CourseDTO))]
         public IHttpActionResult AddCourse(CourseDTO c)
         {
             //checking if the course being added is not of the right data type
