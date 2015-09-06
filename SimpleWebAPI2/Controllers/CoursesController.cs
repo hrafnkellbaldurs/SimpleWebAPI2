@@ -10,80 +10,30 @@ using API.Services;
 
 namespace SimpleWebAPI.Controllers
 {
-    /*
     /// <summary>
     /// This is the Courses Controller
     /// </summary>
     [RoutePrefix("api/courses")]
     public class CoursesController : ApiController
     {
-        private static List<Course> _courses;
-
+        private readonly CoursesServiceProvider _service;
         /// <summary>
         /// This is the main course method
         /// </summary>
         public CoursesController()
         {
-            if(_courses == null)
-            {
-                _courses = new List<Course>
-                {
-                    new Course
-                    {
-                        ID         = 0,
-                        Name       = "Web services",
-                        TemplateID = "T-514-VEFT",
-                        StartDate  = DateTime.Now,
-                        EndDate    = DateTime.Now.AddMonths(3),
-                        Students   = new List<Student>
-                                    {
-                                        new Student
-                                        {
-                                            SSN = "3012932249",
-                                            Name = "Hrafnkell Baldursson"
-                                        },
-                                        new Student
-                                        {
-                                            SSN = "1212882659",
-                                            Name = "Rannveig Guðmundsdóttir"
-                                        }
-                                    }
-
-                    },
-                    new Course
-                    {
-                        ID         = 1,
-                        Name       = "Computer Networking",
-                        TemplateID = "T-409-TSAM",
-                        StartDate  = DateTime.Now,
-                        EndDate    = DateTime.Now.AddMonths(3),
-                        Students   = new List<Student>
-                                    {
-                                        new Student
-                                        {
-                                            SSN = "3012932249",
-                                            Name = "Hrafnkell Baldursson"
-                                        },
-                                        new Student
-                                        {
-                                            SSN = "1212882659",
-                                            Name = "Rannveig Guðmundsdóttir"
-                                        }
-                                    }
-                    }
-                 };
-            }
+            _service = new CoursesServiceProvider();       
         }
 
         /// <summary>
         /// Gets courses currently available
         /// </summary>
-        /// <returns>An ArrayList of Courses</returns>
+        /// <returns>A list of course objects</returns>
         [HttpGet]
         [Route("")]
-        public List<Course> GetCourses()
+        public List<CourseDTO> GetCourses(String semester = null)
         {
-            return _courses;
+            return _service.GetCoursesBySemester(semester);
         }
 
         /// <summary>
@@ -93,15 +43,15 @@ namespace SimpleWebAPI.Controllers
         /// <returns>An ArrayList of Students in the given course</returns>
         [HttpGet]
         [Route("{id:int}/students")]
-        public List <Student> GetStudentsInCourse(int id)
+        public List <StudentDTO> GetStudentsInCourse(int id)
         {   
-            foreach (Course c in _courses)
+           /* foreach (CourseDTO c in _courses)
             {
                 if (c.ID == id)
                 {
-                    return c.Students;
+                    //return student
                 }
-            }
+            }*/
 
             //return 404
             throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -115,7 +65,7 @@ namespace SimpleWebAPI.Controllers
         [HttpPost]
         [Route("")]
         [ResponseType(typeof(Course))]
-        public IHttpActionResult AddCourse(Course c)
+        public IHttpActionResult AddCourse(CourseDTO c)
         {
             //checking if the course being added is not of the right data type
             if (c == null)
@@ -127,7 +77,7 @@ namespace SimpleWebAPI.Controllers
             var location = Url.Link("GetCourse", new { id = c.ID });
 
             //adding course to list
-            _courses.Add(c);
+            //_courses.Add(c);
 
             return Created(location, c);
         }
@@ -140,7 +90,7 @@ namespace SimpleWebAPI.Controllers
         /// <returns>Updated Course or an appropriate error</returns>
         [HttpPut]
         [Route("{id:int}")]
-        public IHttpActionResult UpdateCourse(int id, Course course)
+        public IHttpActionResult UpdateCourse(int id, CourseDTO course)
         {
             //checking if the course being added is not of the right data type
             if (course == null)
@@ -149,7 +99,8 @@ namespace SimpleWebAPI.Controllers
             }
 
             //update right course
-            foreach (Course c in _courses)
+            /*
+            foreach (CourseDTO c in _courses)
             {
                 if (c.ID == id)
                 {
@@ -157,13 +108,12 @@ namespace SimpleWebAPI.Controllers
                     temp.Name = course.Name;
                     temp.StartDate = course.StartDate;
                     temp.EndDate = course.EndDate;
-                    temp.Students = course.Students;
 
                     //201 successfully created
                     var location = Url.Link("GetCourse", new { id = course.ID });
                     return Created(location, temp);
                 }
-            }
+            }*/
 
             //404 id not found
             return NotFound();
@@ -178,14 +128,15 @@ namespace SimpleWebAPI.Controllers
         [Route("{id:int}")]
         public IHttpActionResult DeleteCourse(int id)
         {
-            foreach (Course c in _courses)
+            /*
+            foreach (CourseDTO c in _courses)
             {
                 if (c.ID == id)
                 {
                     _courses.Remove(c);
                     throw new HttpResponseException(HttpStatusCode.NoContent);
                 }
-            }
+            }*/
 
             //return 404
             return NotFound();
@@ -198,12 +149,13 @@ namespace SimpleWebAPI.Controllers
         /// <returns>The Course with the given ID, else HTTP status code 404 if ID is not found</returns>
         [HttpGet]
         [Route("{id:int}", Name ="GetCourse")]
-        public Course GetCourseById(int id)
+        public CourseDTO GetCourseById(int id)
         {
-            foreach (Course c in _courses)
+            /*
+            foreach (CourseDTO c in _courses)
             {
                 if (c.ID == id) return c; 
-            }
+            }*/
 
             //return 404
             throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -217,7 +169,7 @@ namespace SimpleWebAPI.Controllers
         /// <returns>The added Student, else HTTP status code 404</returns>
         [HttpPost]
         [Route("{id:int}/students")]
-        public IHttpActionResult AddStudentToCourse(int id, Student student)
+        public IHttpActionResult AddStudentToCourse(int id, StudentDTO student)
         {
             //checking if the student being added is not of the right data type
             if (student == null)
@@ -225,18 +177,18 @@ namespace SimpleWebAPI.Controllers
                 throw new HttpResponseException(HttpStatusCode.PreconditionFailed);
             }
 
-            foreach (Course c in _courses)
+            /*
+            foreach (CourseDTO c in _courses)
             {
                 if (c.ID == id) {
-                    _courses[_courses.IndexOf(c)].Students.Add(student);
+                    //add student here
                     var location = Url.Link("GetCourse", new { id = c.ID });
                     return Created(location, student);
                 } 
-            }
+            }*/
 
             //return 404
             return NotFound();
         }
     }
-    */
 }

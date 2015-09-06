@@ -25,6 +25,7 @@ namespace API.Models
 
         /// <summary>
         /// Startdate of the course
+        /// Example: "20. 08. 2015"
         /// </summary>
         public DateTime StartDate { get; set; }
 
@@ -32,5 +33,10 @@ namespace API.Models
         /// Enddate of the course
         /// </summary>
         public DateTime EndDate { get; set; }
+
+        /// <summary>
+        /// The number of active students in the course.
+        /// </summary>
+        //public int StudentCount  { get; set; }
     }
 }
